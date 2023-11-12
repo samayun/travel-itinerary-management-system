@@ -5,12 +5,9 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { JwtService } from '@modules/auth/jwt.service';
-import { RoleModule } from '@modules/role/role.module';
+import { AuthModule } from '@modules/auth/auth.module';
 import { Global, Logger, Module } from '@nestjs/common';
 import { UsersModule } from '@modules/users/users.module';
-import { PermissionModule } from '@modules/permission/permission.module';
-import { AuthModule } from '@modules/auth/auth.module';
-import { oAuthModule } from '@modules/oauth/oauth.module';
 
 @Global()
 @Module({
@@ -18,10 +15,7 @@ import { oAuthModule } from '@modules/oauth/oauth.module';
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(config.db.url),
     AuthModule,
-    RoleModule,
     UsersModule,
-    oAuthModule,
-    PermissionModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtService],
